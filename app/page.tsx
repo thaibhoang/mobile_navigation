@@ -1,32 +1,36 @@
-import BottomNavItem from "./BottomNavItem/page";
-import NavItem from "./NavItem/page";
-import Profile from "./Profile/page";
-import { navItems, additionalNavItems } from "./navItems";
-import { bottomNavItems } from "./bottomNav";
+import Profile from "@/app/components/Profile/Profile";
+import NavItem from "@/app/components/Navigation/NavItem";
+import { navItems, additionalNavItems } from "@/app/config/navigation";
+import { profile } from "@/app/config/profile";
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-2">
-      <Profile />
-      <hr></hr>
-      <div className="p-4">
-        {navItems.map((item) => (
-          <NavItem icon={item.icon} key={item.text} text={item.text} />
-        ))}
-      </div>
-      <hr />
-      <div className="p-4">
-        {additionalNavItems.map((item) => (
-          <NavItem icon={item.icon} key={item.text} text={item.text} />
-        ))}
-      </div>
-      <div className="fixed bottom-0 left-[50%] translate-x-[-50%] w-full sm:max-w-[400px]">
-        <div className="p-4 flex justify-around ">
-          {bottomNavItems.map((item, index) => (
-            <BottomNavItem icon={item.icon} key={index} />
+    <main className="max-w-md mx-auto">
+      <Profile profile={profile} />
+
+      <div className="divide-y divide-gray-200">
+        <nav className="p-4 space-y-2">
+          {navItems.map((item) => (
+            <NavItem
+              key={item.text}
+              icon={item.icon}
+              text={item.text}
+              href={item.href}
+            />
           ))}
-        </div>
+        </nav>
+
+        <nav className="p-4 space-y-2">
+          {additionalNavItems.map((item) => (
+            <NavItem
+              key={item.text}
+              icon={item.icon}
+              text={item.text}
+              href={item.href}
+            />
+          ))}
+        </nav>
       </div>
-    </div>
+    </main>
   );
 }
